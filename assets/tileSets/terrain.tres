@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" format=3 uid="uid://cfufmq5g1u7r8"]
+
+[ext_resource type="Texture2D" uid="uid://ch5mkekdyt0mo" path="res://assets/WWT-01.png" id="1_1ngd0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sugp2"]
+texture = ExtResource("1_1ngd0")
+margins = Vector2i(9, 16)
+texture_region_size = Vector2i(110, 96)
+0:0/0 = 0
+
+[resource]
+tile_shape = 3
+tile_offset_axis = 1
+tile_size = Vector2i(110, 96)
+sources/0 = SubResource("TileSetAtlasSource_sugp2")

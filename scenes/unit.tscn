@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b0q6c8135gaxt"]
+
+[ext_resource type="Texture2D" uid="uid://bkt35p10srigj" path="res://assets/icon.svg" id="1_eyrmi"]
+[ext_resource type="Script" uid="uid://bctjk0ayjbs6p" path="res://scenes/Unit.cs" id="1_v5bx4"]
+[ext_resource type="Script" uid="uid://c5mb1xu1pafoh" path="res://scenes/Selectable.cs" id="3_ds1h8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_715ky"]
+size = Vector2(134, 132)
+
+[node name="Unit" type="Node2D" unique_id=1625240504]
+script = ExtResource("1_v5bx4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=880770393]
+texture = ExtResource("1_eyrmi")
+
+[node name="Selectable" type="Area2D" parent="." unique_id=2014975315]
+script = ExtResource("3_ds1h8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selectable" unique_id=805925525]
+shape = SubResource("RectangleShape2D_715ky")
+
+[node name="SelectionUI" type="ColorRect" parent="." unique_id=854476312]
+visible = false
+offset_left = -70.0
+offset_top = -68.0
+offset_right = 70.0
+offset_bottom = 68.0
+color = Color(0.42745098, 0.85490197, 0.16862746, 0.18039216)
+
+[connection signal="mouse_entered" from="Selectable" to="Selectable" method="_on_mouse_entered"]
