@@ -32,7 +32,9 @@ public partial class MainTileMapLayer : TileMapLayer
 		{
 			_hoveredCell = cell;
 			GD.Print("Cell: " + _hoveredCell + " | SourceId: " + GetCellSourceId(cell) + " | CellAtlas: " + GetCellAtlasCoords(cell));
-			_hoverLayer.SetCell(cell, GetCellSourceId(cell), GetCellAtlasCoords(cell));
+			// _hoverLayer.SetCell(cell, GetCellSourceId(cell), GetCellAtlasCoords(cell));
+			_hoverLayer.SetCell(cell, 1, new Vector2I(0,0));
+			GD.Print("HoverLayer Count: " + _hoverLayer.GetUsedCells().Count);
 		}
 		else
 		{

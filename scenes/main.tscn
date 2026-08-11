@@ -13,7 +13,7 @@ script = ExtResource("2_sugp2")
 _hoverLayer = NodePath("HoverLayer")
 
 [node name="HoverLayer" type="TileMapLayer" parent="HexMapLayer" unique_id=292032924]
-modulate = Color(1, 1, 0, 0.39215687)
+modulate = Color(1, 0, 0, 0.6862745)
 z_index = 1
 tile_set = ExtResource("1_sugp2")
 
