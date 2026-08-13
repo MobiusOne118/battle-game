@@ -1,27 +1,26 @@
 [gd_scene format=4 uid="uid://dq8qooutqwigm"]
 
-[ext_resource type="PackedScene" uid="uid://b0q6c8135gaxt" path="res://scenes/unit.tscn" id="1_o5qli"]
 [ext_resource type="TileSet" uid="uid://cfufmq5g1u7r8" path="res://assets/tileSets/terrain.tres" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://cwterykvvxcvr" path="res://scenes/scripts/MainTileMapLayer.cs" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://dg8kdtuat0gku" path="res://scenes/units/base_unit.tscn" id="3_sugp2"]
 
 [node name="Main" type="Node2D" unique_id=1878993281]
 
-[node name="HexMapLayer" type="TileMapLayer" parent="." unique_id=1093578970 node_paths=PackedStringArray("_hoverLayer")]
+[node name="HexMapLayer" type="TileMapLayer" parent="." unique_id=1093578970 node_paths=PackedStringArray("_hoverLayer", "_selectionLayer") groups=["HexMap"]]
 tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAACAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAYAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAACAAcAAAAAAAAAAAADAAYAAAAAAAAAAAADAAUAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAcAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAA=")
 tile_set = ExtResource("1_sugp2")
 script = ExtResource("2_sugp2")
 _hoverLayer = NodePath("HoverLayer")
+_selectionLayer = NodePath("SelectionLayer")
+_unitScene = ExtResource("3_sugp2")
 
 [node name="HoverLayer" type="TileMapLayer" parent="HexMapLayer" unique_id=292032924]
-modulate = Color(1, 0, 0, 0.6862745)
 z_index = 1
 tile_set = ExtResource("1_sugp2")
 
-[node name="Unit0" parent="." unique_id=1625240504 instance=ExtResource("1_o5qli")]
-position = Vector2(981, 546)
+[node name="SelectionLayer" type="TileMapLayer" parent="HexMapLayer" unique_id=592917319]
+modulate = Color(0.7883333, 0.44135645, 3.85046e-07, 1)
+z_index = 1
+tile_set = ExtResource("1_sugp2")
 
-[node name="Unit" parent="." unique_id=185813703 instance=ExtResource("1_o5qli")]
-position = Vector2(992, 111)
-
-[node name="Unit2" parent="." unique_id=1548029619 instance=ExtResource("1_o5qli")]
-position = Vector2(987, 322)
+[node name="UnitsContainer" type="Node2D" parent="." unique_id=1122501837]

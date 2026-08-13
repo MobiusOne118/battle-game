@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dg8kdtuat0gku"]
+
+[ext_resource type="Script" uid="uid://moj06luwud58" path="res://scenes/units/BaseUnit.cs" id="1_hepoc"]
+[ext_resource type="Texture2D" uid="uid://cc4i5f28eqjbb" path="res://assets/Units/Crusader/ww2_top_view_hull8.png" id="2_w2718"]
+[ext_resource type="Texture2D" uid="uid://bd16xw6eo7n76" path="res://assets/Units/Crusader/ww2_top_view_turret8.png" id="3_vep1a"]
+[ext_resource type="Texture2D" uid="uid://c2d1phccbk6nc" path="res://assets/WWT-Select.png" id="4_w2718"]
+
+[node name="BaseUnit" type="Node2D" unique_id=767015025]
+script = ExtResource("1_hepoc")
+
+[node name="SpriteHull" type="Sprite2D" parent="." unique_id=1493641875]
+texture = ExtResource("2_w2718")
+
+[node name="SpriteTurret" type="Sprite2D" parent="." unique_id=1897278615]
+texture = ExtResource("3_vep1a")
+
+[node name="SpriteSelected" type="Sprite2D" parent="." unique_id=96904657]
+visible = false
+texture = ExtResource("4_w2718")
