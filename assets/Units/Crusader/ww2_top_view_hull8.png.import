@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bytg70nanhi4r"
-path="res://.godot/imported/WWT-01 - Copy.png-a46cb0a988c0fba8dac7bf6cd2c7fddd.ctex"
+uid="uid://cc4i5f28eqjbb"
+path="res://.godot/imported/ww2_top_view_hull8.png-838335e3050732913106d289cd1855c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/WWT-01 - Copy.png"
-dest_files=["res://.godot/imported/WWT-01 - Copy.png-a46cb0a988c0fba8dac7bf6cd2c7fddd.ctex"]
+source_file="res://assets/Units/Crusader/ww2_top_view_hull8.png"
+dest_files=["res://.godot/imported/ww2_top_view_hull8.png-838335e3050732913106d289cd1855c9.ctex"]
 
 [params]
 
