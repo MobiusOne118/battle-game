@@ -9,12 +9,14 @@ public partial class MainTileMapLayer : TileMapLayer
 	[Export] private TileMapLayer _hoverLayer;
 	[Export] private TileMapLayer _selectionLayer;
 	[Export] private PackedScene _unitScene;
-	[Export] private int _unitCount { get; set; } = 3;
+	[Export] private int _unitCount { get; set; } = 2;
 	
 	private Node2D _unitsContainer;
 	private Vector2I? _hoveredCell = null;
 	private Vector2I? _selectedCell = null;
-	private List<BaseUnit> _units = new List<BaseUnit>();
+	private bool _isDeploymentPhase = true;
+	// private List<BaseUnit> _units = new List<BaseUnit>();
+	private Dictionary<Vector2I, BaseUnit> _unitsByCell = new Dictionary<Vector2I, BaseUnit>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -23,16 +25,15 @@ public partial class MainTileMapLayer : TileMapLayer
 			GD.PrintErr("HexMap: _hoverLayer is not assigned in the editor!");
 
 		_unitsContainer = GetTree().Root.GetNode<Node2D>("Main/UnitsContainer");
-
-		for (int i = 0; i < _unitCount; i++)
+		
+		if (_isDeploymentPhase)
 		{
-			var unit = _unitScene.Instantiate<BaseUnit>();
-			_unitsContainer.AddChild(unit);
-			_units.Add(unit);
+			DeploymentPhase(_unitCount);
 		}
-		// SpawnUnit(new Vector2I(0,1));
-
-		DeploymentPhase();
+		else
+		{
+			SpawnUnit(new Vector2I(0,1));
+		}
 	}
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -65,6 +66,25 @@ public partial class MainTileMapLayer : TileMapLayer
 	}
 
 	//
+	// Game Phase Logic
+	//
+	public async void DeploymentPhase(int unitCount)
+	{
+		for (var i = 0; i < unitCount; i++)
+		{
+			GD.Print("Select a tile to deploy unit " + i + ".");
+			Vector2I cell = await AwaitCellClick();
+			SpawnUnit(cell);
+		}
+		_isDeploymentPhase = false;
+
+		foreach (var unit in _unitsByCell)
+		{
+			GD.Print("Unit: " + unit.Value + " | Pos: " + unit.Key);
+		}
+	}
+
+	//
 	// Highlight selected cell logic
 	//
 	private void SelectCell(Vector2I cell)
@@ -90,14 +110,16 @@ public partial class MainTileMapLayer : TileMapLayer
 		GD.Print("Spawning unit at " + cell);
 		var unit = _unitScene.Instantiate<BaseUnit>();
     _unitsContainer.AddChild(unit);
+		_unitsByCell.Add(cell, unit);
     unit.Init(cell, this);
 	}
 
 	//
-	// User interaction logic
+	// User Interaction logic
 	//
   public override void _Input(InputEvent @event)
   {
+		// Left Mouse Click
     if (@event is InputEventMouseButton mouseEvent
 			&& mouseEvent.ButtonIndex == MouseButton.Left
 			&& mouseEvent.Pressed)
@@ -112,6 +134,7 @@ public partial class MainTileMapLayer : TileMapLayer
 			}
 		}
 
+		// Right Mouse Click
 		if (@event is InputEventMouseButton rightClickEvent
 			&& rightClickEvent.ButtonIndex == MouseButton.Right
 			&& rightClickEvent.Pressed)
@@ -124,15 +147,6 @@ public partial class MainTileMapLayer : TileMapLayer
 	{
 		var result = await ToSignal(this, SignalName.CellClicked);
 		return (Vector2I)result[0];
-	}
-	public async void DeploymentPhase()
-	{
-		foreach (var unit in _units)
-		{
-			GD.Print("Deploy unit");
-			Vector2I cell = await AwaitCellClick();
-			unit.Init(cell, this);
-		}
 	}
 
 	// Leaving here for now

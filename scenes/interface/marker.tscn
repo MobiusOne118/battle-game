@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dy6a4a2brakty"]
-
-[node name="Marker" type="Node2D" unique_id=1196140390]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1738123925]
